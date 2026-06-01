@@ -272,6 +272,23 @@
       font-size: 13px;
       margin: 14px 0 4px;
     }
+    .clinical-disclaimer {
+      margin: 16px 0 4px;
+      padding: 14px;
+      border: 1px solid rgba(255, 209, 102, .45);
+      border-radius: var(--radius);
+      background: rgba(255, 209, 102, .12);
+      color: #fff0bf;
+      font-size: 13px;
+    }
+    .clinical-disclaimer h2 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      color: #ffe7a1;
+    }
+    .clinical-disclaimer p {
+      margin: 6px 0;
+    }
     .sr-only {
       position: absolute;
       width: 1px;
@@ -417,7 +434,12 @@
     <section class="module" id="references"></section>
     <section class="module" id="settings"></section>
 
-    <p class="footer-help">Uso: ingresar datos, revisar alertas, confirmar concentraciones y validar cada indicación con el protocolo institucional. Para PWA offline completa, mantener `manifest.json`, iconos y `service-worker.js`; esta página ya registra el service worker si está disponible.</p>
+    <section class="clinical-disclaimer" aria-label="Aviso clínico">
+      <h2>Aviso clínico</h2>
+      <p>Esta calculadora es una herramienta de referencia práctica para personal de salud. Sus resultados deben ser interpretados y verificados por un médico o profesional sanitario capacitado antes de tomar decisiones clínicas.</p>
+      <p>Confirmar siempre peso, edad, concentración disponible, vía de administración, dosis máximas, contraindicaciones y protocolo institucional/local. La herramienta no reemplaza el juicio clínico, la evaluación directa del paciente ni las guías oficiales vigentes.</p>
+    </section>
+    <p class="footer-help">Uso: ingresar datos, revisar alertas, confirmar concentraciones y validar cada indicación con el protocolo institucional.</p>
   </main>
 
   <script>
