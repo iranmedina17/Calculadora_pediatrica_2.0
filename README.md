@@ -11,18 +11,6 @@ Aplicación web offline para cálculos rápidos de apoyo en emergencias pediátr
 - `referencias/`: tablas y documentos PDF de consulta.
 - `privacy.html`: política de privacidad básica.
 
-## Publicar en GitHub Pages
-
-1. Crear un repositorio nuevo en GitHub.
-2. Subir todos los archivos de esta carpeta a la raíz del repositorio.
-3. Entrar a `Settings > Pages`.
-4. En `Build and deployment`, elegir:
-   - Source: `Deploy from a branch`
-   - Branch: `main`
-   - Folder: `/root`
-5. Guardar.
-6. Abrir la URL que genera GitHub Pages.
-
 ## Instalar en teléfono
 
 ### Android
