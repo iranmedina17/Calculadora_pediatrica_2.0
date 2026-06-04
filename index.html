@@ -73,18 +73,6 @@
       color: var(--muted);
       font-size: 13px;
     }
-    .version-badge {
-      display: inline-flex;
-      align-items: center;
-      margin-top: 7px;
-      border: 1px solid rgba(125, 211, 252, .45);
-      border-radius: 999px;
-      padding: 4px 9px;
-      background: rgba(125, 211, 252, .12);
-      color: #c8f2ff;
-      font-size: 12px;
-      font-weight: 850;
-    }
     .safety-alert {
       border-top: 1px solid rgba(244, 183, 64, .34);
       background: #302614;
@@ -272,6 +260,14 @@
       border-color: var(--blue);
       background: var(--blue-soft);
     }
+    .reference-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .reference-list li {
+      margin: 6px 0;
+      color: #d9e2ec;
+    }
     .timer-card { padding: 12px; margin-bottom: 10px; box-shadow: none; }
     .timer-display {
       font-size: 42px;
@@ -312,56 +308,6 @@
       white-space: nowrap;
       border: 0;
     }
-    .consent-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      background: rgba(6, 10, 18, .88);
-      backdrop-filter: blur(8px);
-    }
-    .consent-overlay.active { display: flex; }
-    .consent-card {
-      width: min(680px, 100%);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px;
-      background: var(--panel);
-      box-shadow: var(--shadow);
-    }
-    .consent-card h2 {
-      margin: 0 0 10px;
-      font-size: 22px;
-    }
-    .consent-card p, .consent-card li {
-      color: #dce6f2;
-    }
-    .consent-card ul {
-      margin: 10px 0;
-      padding-left: 20px;
-    }
-    .consent-check {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      margin: 12px 0;
-      color: #f8fafc;
-      font-weight: 750;
-      text-transform: none;
-    }
-    .consent-check input {
-      width: 20px;
-      min-height: 20px;
-      margin-top: 2px;
-      flex: 0 0 auto;
-    }
-    .consent-card .btn[disabled] {
-      opacity: .48;
-      cursor: not-allowed;
-    }
 
     @media (max-width: 850px) {
       .field, .field.small, .field.wide { grid-column: span 6; }
@@ -387,28 +333,11 @@
   </style>
 </head>
 <body>
-  <div class="consent-overlay" id="consentOverlay" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
-    <section class="consent-card">
-      <h2 id="consentTitle">Uso profesional y versión beta</h2>
-      <p>Esta es una versión beta para revisión clínica y uso como referencia práctica por personal de salud.</p>
-      <ul>
-        <li>No reemplaza el juicio clínico ni la evaluación directa del paciente.</li>
-        <li>Verificar siempre peso, edad, concentración, vía de administración, dosis máximas y protocolo local.</li>
-        <li>Reportar cualquier discrepancia antes de usar el resultado en una decisión clínica.</li>
-      </ul>
-      <label class="consent-check" for="consentCheck">
-        <input id="consentCheck" type="checkbox">
-        Confirmo que soy profesional de salud o estoy revisando la herramienta bajo supervisión clínica, y entiendo sus limitaciones.
-      </label>
-      <button class="btn primary" id="acceptConsent" type="button" disabled>Aceptar y continuar</button>
-    </section>
-  </div>
   <header class="app-header">
     <div class="topbar">
       <div class="brand">
         <h1>Calculadora Pediátrica de Emergencia</h1>
         <p>App offline de apoyo para cálculos rápidos en emergencias pediátricas.</p>
-        <span class="version-badge">Beta 0.1.0 · revisión clínica</span>
       </div>
       <button class="btn primary" type="button" id="quickCopy">Copiar hoja rápida</button>
     </div>
@@ -494,6 +423,7 @@
       <button class="tab" data-tab="rsi" type="button">Sedoanalgesia</button>
       <button class="tab" data-tab="ventilation" type="button">Ventilación</button>
       <button class="tab" data-tab="antibiotics" type="button">Antibióticos</button>
+      <button class="tab" data-tab="dengue" type="button">Dengue</button>
       <button class="tab" data-tab="anthropometry" type="button">Antropometría</button>
       <button class="tab" data-tab="references" type="button">Tablas OMS/MSP</button>
       <button class="tab" data-tab="settings" type="button">Configuración</button>
@@ -509,6 +439,7 @@
     <section class="module" id="rsi"></section>
     <section class="module" id="ventilation"></section>
     <section class="module" id="antibiotics"></section>
+    <section class="module" id="dengue"></section>
     <section class="module" id="anthropometry"></section>
     <section class="module" id="references"></section>
     <section class="module" id="settings"></section>
@@ -523,7 +454,6 @@
 
   <script>
     const SETTINGS_KEY = "pedEmergencySettings.v1";
-    const CONSENT_KEY = "pedEmergencyConsent.v1";
     const ADULT_MAX_ENERGY = 200;
     const defaultSettings = {
       epiArrest: 0.1,
@@ -535,6 +465,7 @@
       midazolam: 5,
       diazepam: 5,
       lorazepam: 2,
+      phenobarbital: 200,
       ketamine: 50,
       fentanyl: 50,
       morphine: 10,
@@ -551,31 +482,39 @@
       vancomycin: 50,
       meropenem: 50,
       piptazo: 100,
+      ceftazidime: 100,
       metronidazole: 50,
       amikacin: 250
     };
     const settingsMeta = {
       epiArrest: ["Adrenalina paro", "mg/mL"], epiIM: ["Adrenalina IM", "mg/mL"], epiET: ["Adrenalina ET", "mg/mL"],
       amiodarone: ["Amiodarona", "mg/mL"], lidocaine: ["Lidocaína", "mg/mL"], magnesium: ["Sulfato de magnesio", "mg/mL"],
-      midazolam: ["Midazolam", "mg/mL"], diazepam: ["Diazepam", "mg/mL"], lorazepam: ["Lorazepam", "mg/mL"],
+      midazolam: ["Midazolam", "mg/mL"], diazepam: ["Diazepam", "mg/mL"], lorazepam: ["Lorazepam", "mg/mL"], phenobarbital: ["Fenobarbital", "mg/mL"],
       ketamine: ["Ketamina", "mg/mL"], fentanyl: ["Fentanilo", "mcg/mL"], morphine: ["Morfina", "mg/mL"],
       rocuronium: ["Rocuronio", "mg/mL"], succinylcholine: ["Succinilcolina", "mg/mL"], atropine: ["Atropina", "mg/mL"],
       dextrose10: ["Dextrosa 10%", "g/mL"], dextrose25: ["Dextrosa 25%", "g/mL"], dextrose50: ["Dextrosa 50%", "g/mL"],
       ceftriaxone: ["Ceftriaxona reconstituida", "mg/mL"], cefotaxime: ["Cefotaxima reconstituida", "mg/mL"],
       ampicillin: ["Ampicilina reconstituida", "mg/mL"], gentamicin: ["Gentamicina", "mg/mL"],
       vancomycin: ["Vancomicina reconstituida", "mg/mL"], meropenem: ["Meropenem reconstituido", "mg/mL"],
-      piptazo: ["Piperacilina/tazobactam", "mg/mL"], metronidazole: ["Metronidazol", "mg/mL"], amikacin: ["Amikacina", "mg/mL"]
+      piptazo: ["Piperacilina/tazobactam", "mg/mL"], ceftazidime: ["Ceftazidima reconstituida", "mg/mL"], metronidazole: ["Metronidazol", "mg/mL"], amikacin: ["Amikacina", "mg/mL"]
     };
-    const growthData = {
-      who_0_5: {
-        male: { weight_for_age: [], height_for_age: [], weight_for_height: [], bmi_for_age: [] },
-        female: { weight_for_age: [], height_for_age: [], weight_for_height: [], bmi_for_age: [] }
-      },
-      who_5_19: {
-        male: { height_for_age: [], bmi_for_age: [], weight_for_age_5_10: [] },
-        female: { height_for_age: [], bmi_for_age: [], weight_for_age_5_10: [] }
-      }
+    const clinicalReferences = {
+      "REF-001": "American Heart Association. Pediatric Advanced Life Support: 2025 American Heart Association Guidelines for CPR and Emergency Cardiovascular Care.",
+      "REF-002": "Resuscitation Council UK. Paediatric Life Support: 2025 resuscitation guidelines.",
+      "REF-003": "Advanced Life Support Group. Advanced Paediatric Life Support: A Practical Approach to Emergencies. 7th ed. Wiley. 2023/2024.",
+      "REF-005": "Surviving Sepsis Campaign. International Guidelines for the Management of Septic Shock and Sepsis-Associated Organ Dysfunction in Children. 2020.",
+      "REF-006": "Royal Children's Hospital Melbourne. Clinical Practice Guidelines: Intravenous fluids. Vigente web.",
+      "REF-007": "PALICC-2. Second International Guidelines for the Diagnosis and Management of Pediatric Acute Respiratory Distress Syndrome. 2023.",
+      "REF-008": "World Health Organization. WHO Child Growth Standards. 2006/2007.",
+      "REF-009": "World Health Organization. Growth reference data for 5-19 years. 2007.",
+      "REF-010": "World Health Organization. Computation of centiles and z-scores for height-for-age, weight-for-age and BMI-for-age. 2007.",
+      "REF-011": "Mosteller RD. Simplified calculation of body-surface area. N Engl J Med. 1987;317:1098.",
+      "REF-012": "CDC. About Body Mass Index (BMI). 2025.",
+      "REF-013": "Seddon C, et al. Validation of Advanced Paediatric Life Support Formulas for Weight Calculation in a Multiethnic Population. 2012.",
+      "REF-DENGUE-2020": "OPS/OMS. Algoritmos para el Manejo Clínico de los Casos de Dengue. Programa Regional de Enfermedades Arbovirales. Junio 2020."
     };
+    let growthData = null;
+    let growthDataStatus = "Cargando tablas OMS/MSP...";
     let settings = loadSettings();
     let state = {};
     let timerId = null;
@@ -603,6 +542,7 @@
       return {
         name: $("patientName").value.trim(),
         years, months, days, ageMonths, ageYears,
+        ageDays: (ageMonths * 30.4375),
         sex: $("sex").value,
         sexLabel: $("sex").value === "male" ? "Masculino" : "Femenino",
         weight, height, heightMode: $("heightMode").value, weightMode: $("weightMode").value,
@@ -653,6 +593,34 @@
       const raw = weight * mcgPerKg;
       const limited = maxMcg ? clampDose(raw, maxMcg) : { dose: raw, limited: false };
       return { mcg: round(limited.dose, 1), ml: concentrationMcgPerMl > 0 ? round(limited.dose / concentrationMcgPerMl, 2) : null, limited: limited.limited, maxMcg };
+    }
+    function calculateDrugDoseRange(weight, lowPerKg, highPerKg, maxDose, concentration) {
+      const lowRaw = weight * lowPerKg;
+      const highRaw = weight * highPerKg;
+      const low = maxDose ? Math.min(lowRaw, maxDose) : lowRaw;
+      const high = maxDose ? Math.min(highRaw, maxDose) : highRaw;
+      return {
+        low: round(low, 2),
+        high: round(high, 2),
+        lowMl: concentration > 0 ? round(low / concentration, 2) : null,
+        highMl: concentration > 0 ? round(high / concentration, 2) : null,
+        limited: Boolean(maxDose && highRaw > maxDose),
+        maxDose
+      };
+    }
+    function calculateMcgDrugDoseRange(weight, lowPerKg, highPerKg, maxMcg, concentrationMcgPerMl) {
+      const lowRaw = weight * lowPerKg;
+      const highRaw = weight * highPerKg;
+      const low = maxMcg ? Math.min(lowRaw, maxMcg) : lowRaw;
+      const high = maxMcg ? Math.min(highRaw, maxMcg) : highRaw;
+      return {
+        low: round(low, 1),
+        high: round(high, 1),
+        lowMl: concentrationMcgPerMl > 0 ? round(low / concentrationMcgPerMl, 2) : null,
+        highMl: concentrationMcgPerMl > 0 ? round(high / concentrationMcgPerMl, 2) : null,
+        limited: Boolean(maxMcg && highRaw > maxMcg),
+        maxMcg
+      };
     }
     function calculateFluidBolus(weight, mlPerKg) { return round(weight * mlPerKg, 0); }
     function calculate421Rule(weight) {
@@ -717,21 +685,61 @@
       p = z > 0 ? 1 - p : p;
       return `${round(p * 100, 1)}%`;
     }
+    async function loadGrowthData() {
+      try {
+        const response = await fetch("./growth-lms-oms-msp.json", { cache: "no-cache" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        growthData = await response.json();
+        growthDataStatus = "Tablas OMS/MSP LMS cargadas";
+      } catch (error) {
+        growthData = null;
+        growthDataStatus = "No se pudieron cargar las tablas OMS/MSP LMS";
+      }
+    }
+    function findNearestLMS(indicator, sex, x) {
+      const rows = growthData?.indicators?.[indicator]?.[sex];
+      if (!rows || !rows.length || !Number.isFinite(x)) return null;
+      let best = rows[0];
+      let bestDiff = Math.abs(rows[0][0] - x);
+      for (let i = 1; i < rows.length; i += 1) {
+        const diff = Math.abs(rows[i][0] - x);
+        if (diff < bestDiff) {
+          best = rows[i];
+          bestDiff = diff;
+        }
+      }
+      return { x: best[0], L: best[1], M: best[2], S: best[3] };
+    }
+    function buildAnthroRow(key, label, value, indicatorType, lmsIndicator, x, measuredValue) {
+      const p = state.patient;
+      const lms = findNearestLMS(lmsIndicator, p.sex, x);
+      const z = lms ? calculateZScore(measuredValue, lms.L, lms.M, lms.S) : null;
+      return {
+        key,
+        indicator: label,
+        value,
+        z,
+        percentile: z === null ? null : percentileFromZ(z),
+        classification: classifyZScore(indicatorType, z),
+        reference: lms ? `OMS/MSP ${lmsIndicator}; referencia ${round(lms.x, 2)}` : growthDataStatus
+      };
+    }
     function calculateAnthropometry() {
       const p = state.patient;
-      const simulated = [
-        { key: "weightAge", indicator: "Peso para la edad", value: fmt(p.weight, 1, " kg"), z: null, classification: classifyZScore("weight", null) },
-        { key: "heightAge", indicator: p.ageMonths <= 60 ? "Longitud/talla para la edad" : "Talla para la edad", value: fmt(p.height, 1, " cm"), z: null, classification: classifyZScore("height", null) },
-        { key: "weightHeight", indicator: "Peso para la talla", value: `${fmt(p.weight, 1, " kg")} / ${fmt(p.height, 1, " cm")}`, z: null, classification: classifyZScore("bmi", null) },
-        { key: "bmiAge", indicator: "IMC", value: fmt(p.bmi, 1, " kg/m²"), z: null, classification: classifyZScore("bmi", null) }
+      const heightAgeIndicator = p.ageMonths <= 60 ? "LHFA" : "HFA";
+      const weightHeightIndicator = p.ageMonths < 24 || p.heightMode === "recumbent" ? "WFL" : "WFH";
+      return [
+        buildAnthroRow("weightAge", "Peso para la edad", fmt(p.weight, 1, " kg"), "weight", "WFA", p.ageDays, p.weight),
+        buildAnthroRow("heightAge", p.ageMonths <= 60 ? "Longitud/talla para la edad" : "Talla para la edad", fmt(p.height, 1, " cm"), "height", heightAgeIndicator, p.ageDays, p.height),
+        buildAnthroRow("weightHeight", "Peso para la talla", `${fmt(p.weight, 1, " kg")} / ${fmt(p.height, 1, " cm")}`, "bmi", weightHeightIndicator, p.height, p.weight),
+        buildAnthroRow("bmiAge", "IMC", fmt(p.bmi, 1, " kg/m²"), "bmi", "BFA", p.ageDays, p.bmi)
       ];
-      return simulated;
     }
     function anthropometryResultLabel(row) {
-      return row.z === null || row.z === undefined ? "pendiente hasta cargar tablas OMS" : row.classification;
+      return row.z === null || row.z === undefined ? "pendiente por tabla/rango no disponible" : row.classification;
     }
     function anthropometryPercentileLabel(row) {
-      return row.z === null || row.z === undefined ? "pendiente" : percentileFromZ(row.z);
+      return row.z === null || row.z === undefined ? "pendiente" : row.percentile;
     }
     function buildAnthropometryText() {
       const rows = calculateAnthropometry();
@@ -786,9 +794,12 @@
         midazolamIN: calculateDrugDose(w, 0.2, 10, settings.midazolam),
         diazepamIV: calculateDrugDose(w, 0.2, 10, settings.diazepam),
         lorazepamIV: calculateDrugDose(w, 0.1, 4, settings.lorazepam),
+        phenobarbitalLoad: calculateDrugDoseRange(w, 15, 20, null, settings.phenobarbital),
+        phenobarbitalRepeat: calculateDrugDoseRange(w, 5, 10, null, settings.phenobarbital),
         ketamineAnalgesia: calculateDrugDose(w, 0.5, 50, settings.ketamine),
         ketamineRsi: calculateDrugDose(w, 1.5, 150, settings.ketamine),
         fentanyl: calculateMcgDrugDose(w, 1, 100, settings.fentanyl),
+        fentanylRange: calculateMcgDrugDoseRange(w, 1, 2, null, settings.fentanyl),
         morphine: calculateDrugDose(w, 0.1, 10, settings.morphine),
         rocuronium: calculateDrugDose(w, 1, 100, settings.rocuronium),
         succinylcholine: calculateDrugDose(w, 1.5, 150, settings.succinylcholine),
@@ -804,6 +815,16 @@
       const max = dose.maxDose || dose.maxMcg ? ` Máx: ${dose.maxDose || dose.maxMcg} ${dose.mcg ? "mcg" : unit}.` : "";
       const limited = dose.limited ? " <strong>Limitada por dosis máxima.</strong>" : "";
       return `<p>${name}: <strong>${amount} = ${fmt(dose.ml, 2, " mL")}</strong>.${max}${limited}</p>`;
+    }
+    function doseRangeLine(name, dose, unit = "mg") {
+      const max = dose.maxDose || dose.maxMcg ? ` Máx: ${dose.maxDose || dose.maxMcg} ${unit}.` : "";
+      const limited = dose.limited ? " <strong>Limitada por dosis máxima.</strong>" : "";
+      return `<p>${name}: <strong>${dose.low}-${dose.high} ${unit} = ${fmt(dose.lowMl, 2, " mL")}-${fmt(dose.highMl, 2, " mL")}</strong>.${max}${limited}</p>`;
+    }
+    function referenceBlock(ids) {
+      const refs = [...new Set(ids)].map(id => clinicalReferences[id]).filter(Boolean);
+      if (!refs.length) return "";
+      return card("Respaldo bibliográfico", `<ul class="reference-list">${refs.map(ref => `<li>${ref}</li>`).join("")}</ul>`, "soft");
     }
     function card(title, body, tone = "") { return `<article class="result-card ${tone}"><h3>${title}</h3>${body}</article>`; }
     function renderWarnings() {
@@ -854,6 +875,7 @@
         ${card("Cardioversión sincronizada", `<p>Inicial: <strong>${state.cardio.initialLow}-${state.cardio.initialHigh} J</strong>.</p><p>Segunda: <strong>${state.cardio.second} J</strong>.</p>`, "caution")}
         ${card("Antiarrítmicos", `${doseLine("Amiodarona 5 mg/kg IV/IO", d.amiodarone)}${doseLine("Lidocaína 1 mg/kg IV/IO", d.lidocaine)}${doseLine("Magnesio 25 mg/kg", d.magnesiumLow)}${doseLine("Magnesio 50 mg/kg", d.magnesiumHigh)}`, "info")}
         ${card("H y T", "<ul><li>Hipoxia</li><li>Hipovolemia</li><li>Hidrogeniones/acidosis</li><li>Hipo/hiperpotasemia</li><li>Hipotermia</li><li>Neumotórax a tensión</li><li>Taponamiento cardíaco</li><li>Tóxicos</li><li>Trombosis pulmonar</li><li>Trombosis coronaria</li></ul>", "info")}
+        ${referenceBlock(["REF-001", "REF-002", "REF-003"])}
       </div>`;
       bindTimerButtons();
     }
@@ -866,6 +888,7 @@
         ${card("Tubo endotraqueal", `${metric("Sin cuff", state.ett.uncuffed)}${metric("Con cuff", state.ett.cuffed)}${metric("Profundidad oral por diámetro", fmt(state.depth.oralBySize, 1, " cm"))}${metric("Profundidad oral por edad", fmt(state.depth.oralByAge, 1, " cm"))}${metric("Profundidad nasal", fmt(state.depth.nasal, 1, " cm"))}`, "info")}
         ${card("Dispositivos", `${metric("Hoja sugerida", blade)}${metric("Máscara laríngea / iGel", lma)}${metric("Sonda aspiración", suction)}<p>Cánula orofaríngea: medir desde comisura labial hasta ángulo mandibular.</p><p>Cánula nasofaríngea: medir desde narina hasta trago. Evitar si trauma facial/base de cráneo.</p>`, "ok")}
         ${card("Confirmación", `<p>Confirmar posición del TET con capnografía, auscultación bilateral, expansión torácica y radiografía si aplica.</p>${state.ett.neonatal ? "<p><strong>Confirmar con protocolo neonatal específico.</strong></p>" : ""}`, "caution")}
+        ${referenceBlock(["REF-001", "REF-003"])}
       </div>`;
     }
     function renderShockModule() {
@@ -874,12 +897,14 @@
         ${card("Cristaloides", `<p>Bolo prudente: <strong>${calculateFluidBolus(p.usedWeight, 10)} mL</strong>.</p><p>Bolo estándar: <strong>${calculateFluidBolus(p.usedWeight, 20)} mL</strong>.</p><p>Reevaluar perfusión, pulmones, hepatomegalia y respuesta clínica tras cada bolo.</p>`, "caution")}
         ${card("Mantenimiento", `${metric("Regla 4-2-1", `${m.hourly} mL/h`)}${metric("Holliday-Segar", `${m.daily} mL/día`)}`, "info")}
         ${card("Hemorragia / sepsis", "<p>En shock hemorrágico, priorizar hemoderivados según protocolo.</p><p>En sepsis, administrar antibióticos tempranos y reevaluar fluidos con frecuencia.</p>", "critical")}
+        ${referenceBlock(["REF-005", "REF-006"])}
       </div>`;
     }
     function renderSeizureModule() {
       const d = state.doses;
       $("seizure").innerHTML = `<h2>Convulsiones</h2><div class="cards">
         ${card("Benzodiacepinas", `${doseLine("<strong>Midazolam</strong> IN/IM 0.2 mg/kg", d.midazolamIN)}${doseLine("<strong>Diazepam</strong> IV/rectal 0.2 mg/kg", d.diazepamIV)}${doseLine("<strong>Lorazepam</strong> IV 0.1 mg/kg", d.lorazepamIV)}<p>Revisar vía, ventilación y glucemia. Evitar repeticiones excesivas sin soporte ventilatorio.</p>`, "critical")}
+        ${card("Fenobarbital", `${doseRangeLine("<strong>Fenobarbital</strong> carga 15-20 mg/kg IV/VO", d.phenobarbitalLoad)}${doseRangeLine("Repetición 5-10 mg/kg si persisten convulsiones", d.phenobarbitalRepeat)}<p>Mantenimiento: 3-5 mg/kg/día cada 12-24 h según contexto.</p><p>Máximo: carga total habitual hasta 40 mg/kg. Vigilar sedación profunda, depresión respiratoria e hipotensión; considerar niveles séricos si disponibles.</p>`, "caution")}
         ${card("Después de BZD", "<p>Si persiste, seguir protocolo local con levetiracetam, fenitoína/fosfenitoína, valproato o fenobarbital según contexto.</p>", "caution")}
       </div>`;
     }
@@ -900,7 +925,7 @@
     function renderRSIModule() {
       const d = state.doses;
       $("rsi").innerHTML = `<h2>Sedoanalgesia / intubación</h2><div class="cards">
-        ${card("Analgesia / sedación", `${doseLine("Fentanilo 1 mcg/kg", d.fentanyl, "mcg")}${doseLine("Morfina 0.1 mg/kg", d.morphine)}${doseLine("Ketamina analgesia 0.5 mg/kg", d.ketamineAnalgesia)}${doseLine("Ketamina inducción 1.5 mg/kg", d.ketamineRsi)}`, "info")}
+        ${card("Analgesia / sedación", `${doseRangeLine("Fentanilo 1-2 mcg/kg IV lento", d.fentanylRange, "mcg")}<p>Sedoanalgesia continua: 1-5 mcg/kg/h según contexto. Riesgo de depresión respiratoria, rigidez torácica si bolo rápido, bradicardia e hipotensión; usar con monitorización cardiorrespiratoria.</p>${doseLine("Morfina 0.1 mg/kg", d.morphine)}${doseLine("Ketamina analgesia 0.5 mg/kg", d.ketamineAnalgesia)}${doseLine("Ketamina inducción 1.5 mg/kg", d.ketamineRsi)}`, "info")}
         ${card("Parálisis", `${doseLine("Rocuronio 1 mg/kg", d.rocuronium)}${doseLine("Succinilcolina 1.5 mg/kg", d.succinylcholine)}${doseLine("Atropina 0.02 mg/kg", d.atropine)}<p>Preparar plan de vía aérea difícil, succión, monitorización y medicación de rescate.</p>`, "caution")}
       </div>`;
     }
@@ -909,6 +934,7 @@
       $("ventilation").innerHTML = `<h2>Ventilación</h2><div class="cards">
         ${card("Parámetros iniciales", `${metric("Frecuencia respiratoria", v.rr)}${metric("Volumen corriente", `${v.vt} = ${v.vtMl}`)}${metric("PEEP inicial", v.peep)}<p>${v.tubeNote}</p>`, "info")}
         ${card("Seguridad", "<p>Confirmar ETCO2, saturación, presión pico/plateau si aplica, auscultación y gases según disponibilidad.</p><p>Evitar hiperventilación durante RCP salvo indicación específica.</p>", "caution")}
+        ${referenceBlock(["REF-001", "REF-003", "REF-007"])}
       </div>`;
     }
     function renderAntibioticModule() {
@@ -924,19 +950,40 @@
         ["Metronidazol", "10 mg/kg/dosis cada 8 h", 10, 500, settings.metronidazole, "Anaerobios."],
         ["Amikacina", "15-20 mg/kg/día", 20, 1500, settings.amikacin, "Advertencia renal/auditiva."]
       ];
-      const rows = antibiotics.map(([name, schema, doseKg, max, conc, warn]) => {
+      const standardRows = antibiotics.map(([name, schema, doseKg, max, conc, warn]) => {
         const dose = calculateDrugDose(w, doseKg, max, conc);
         return `<tr><td>${name}</td><td>${schema}</td><td>${dose.mg} mg</td><td>${fmt(dose.ml, 2, " mL")}</td><td>${max} mg</td><td>${warn}${dose.limited ? " Dosis limitada por máximo." : ""}</td></tr>`;
       }).join("");
+      const ceftazidimeDose = calculateDrugDoseRange(w, 30, 50, 2000, settings.ceftazidime);
+      const ceftazidimeRow = `<tr><td>Ceftazidima</td><td>30-50 mg/kg/dosis IV cada 8 h</td><td>${ceftazidimeDose.low}-${ceftazidimeDose.high} mg</td><td>${fmt(ceftazidimeDose.lowMl, 2, " mL")}-${fmt(ceftazidimeDose.highMl, 2, " mL")}</td><td>6 g/día</td><td>Ajustar a función renal. Cubre Gram negativos incluyendo Pseudomonas; no cubre adecuadamente Gram positivos ni anaerobios. En escenarios graves seleccionados puede usarse hasta 150 mg/kg/día dividido cada 8 h.${ceftazidimeDose.limited ? " Dosis por administración limitada por máximo usual." : ""}</td></tr>`;
+      const rows = standardRows.replace("</tr><tr><td>Metronidazol", `</tr>${ceftazidimeRow}<tr><td>Metronidazol`);
       $("antibiotics").innerHTML = `<h2>Antibióticos</h2><div class="note warn">Antibiótico empírico debe ajustarse a foco, edad, epidemiología local, función renal, cultivos y protocolo institucional.</div><div class="table-wrap"><table><thead><tr><th>Antibiótico</th><th>Dosis</th><th>Cálculo</th><th>Volumen</th><th>Máximo</th><th>Advertencias</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    }
+    function renderDengueModule() {
+      const w = state.patient.usedWeight;
+      const rate = value => `${fmt(w * value, 0, " mL/h")}`;
+      const bolus = value => `${fmt(w * value, 0, " mL")}`;
+      $("dengue").innerHTML = `<h2>Dengue</h2>
+        <div class="note warn">Basado en algoritmos OPS/OMS 2020. Confirmar fase clínica, signos de alarma, comorbilidades, hematocrito, diuresis y protocolo local. Evitar sobrehidratación.</div>
+        <div class="cards">
+          ${card("Clasificación rápida", "<p><strong>DSSA:</strong> dengue sin signos de alarma.</p><p><strong>DCSA:</strong> dengue con signos de alarma.</p><p><strong>DG:</strong> dengue grave: choque/dificultad respiratoria por extravasación, sangrado grave o compromiso grave de órganos.</p>", "info")}
+          ${card("Grupo A / B1", `<p>Manejo ambulatorio u observación según riesgo social/comorbilidad.</p><p>Estimular líquidos orales y sales de rehidratación oral.</p><p>Si no bebe, bebe poco o está deshidratado: cristaloide IV según Holliday-Segar o <strong>2-4 mL/kg/h = ${rate(2)}-${rate(4)}</strong>.</p><p>Acetaminofén niños: 10 mg/kg VO cada 6 h. Evitar AINEs/aspirina.</p>`, "ok")}
+          ${card("Grupo B2: DCSA", `<p>Cristaloide (Hartman o SSN 0.9%): <strong>10 mL/kg en 1 h = ${bolus(10)}</strong>.</p><p>Si mejora: reducir a <strong>5-7 mL/kg/h = ${rate(5)}-${rate(7)}</strong> por 2-4 h.</p><p>Luego <strong>3-5 mL/kg/h = ${rate(3)}-${rate(5)}</strong> por 2-4 h.</p><p>Luego <strong>2-4 mL/kg/h = ${rate(2)}-${rate(4)}</strong> por 24-48 h.</p><p>Si no mejora: repetir 2ª y 3ª carga de 10 mL/kg en 1 h; si persiste, clasificar como dengue grave.</p>`, "caution")}
+          ${card("B2 con comorbilidad", `<p>Cristaloide: <strong>5 mL/kg en 1 h = ${bolus(5)}</strong>.</p><p>Si mejora: <strong>4 mL/kg/h = ${rate(4)}</strong> por 2-4 h.</p><p>Luego <strong>3 mL/kg/h = ${rate(3)}</strong> por 2-4 h.</p><p>Luego <strong>2 mL/kg/h = ${rate(2)}</strong> por 2-4 h.</p><p>Si no mejora: repetir 2ª y 3ª carga de 5 mL/kg en 1 h; si persiste, manejar como Grupo C.</p>`, "caution")}
+          ${card("Grupo C: choque por dengue grave", `<p>ABC, oxígeno y signos vitales cada 5-30 min.</p><p>Cristaloide: <strong>20 mL/kg en 15-30 min = ${bolus(20)}</strong>.</p><p>Si persiste choque: 2º y 3º bolo de <strong>20 mL/kg = ${bolus(20)}</strong>.</p><p>Si mejora: reducir a <strong>10 mL/kg/h = ${rate(10)}</strong> por 1-2 h; luego <strong>5-7 mL/kg/h = ${rate(5)}-${rate(7)}</strong> por 4-6 h; luego <strong>3-5 mL/kg/h = ${rate(3)}-${rate(5)}</strong> por 2-4 h; luego <strong>2-4 mL/kg/h = ${rate(2)}-${rate(4)}</strong> por 24-48 h.</p>`, "critical")}
+          ${card("Mejoría clínica", "<ul><li>Desaparición progresiva de signos de alarma o choque.</li><li>Signos vitales estables.</li><li>Diuresis normal o aumentada.</li><li>Disminución del hematocrito hacia valor basal con paciente estable.</li><li>Buena tolerancia oral y recuperación del apetito.</li></ul>", "ok")}
+          ${card("Criterios de hospitalización", "<ul><li>Dengue con signos de alarma.</li><li>Dengue grave.</li><li>Intolerancia a la vía oral.</li><li>Dificultad respiratoria.</li><li>Acortamiento de presión de pulso.</li><li>Llenado capilar mayor de 2 segundos.</li></ul>", "caution")}
+          ${card("Signos de alarma", "<ul><li>Dolor abdominal intenso y sostenido o dolor a la palpación.</li><li>Vómitos persistentes.</li><li>Acumulación de líquidos.</li><li>Sangrado de mucosas.</li><li>Letargo o irritabilidad.</li><li>Hipotensión postural/lipotimia.</li><li>Hepatomegalia mayor de 2 cm.</li><li>Aumento progresivo del hematocrito.</li></ul>", "critical")}
+          ${referenceBlock(["REF-DENGUE-2020"])}
+        </div>`;
     }
     function renderAnthropometryModule() {
       const rowsData = calculateAnthropometry();
-      const rows = rowsData.map(row => `<tr><td>${row.indicator}</td><td>${row.value}</td><td>${row.z === null ? "Pendiente" : round(row.z, 2)}</td><td>${anthropometryPercentileLabel(row)}</td><td>${anthropometryResultLabel(row)}</td></tr>`).join("");
+      const rows = rowsData.map(row => `<tr><td>${row.indicator}</td><td>${row.value}</td><td>${row.z === null ? "Pendiente" : round(row.z, 2)}</td><td>${anthropometryPercentileLabel(row)}</td><td>${anthropometryResultLabel(row)}</td><td>${row.reference || ""}</td></tr>`).join("");
       const clinicalText = buildAnthropometryText();
       $("anthropometry").innerHTML = `<h2>Antropometría y peso seguro para dosis</h2>
-        <div class="note info">Estructura lista para importar tablas OMS LMS en JSON. Sin tablas reales cargadas, no se emiten percentiles ni Z-score clínicos definitivos.</div>
-        <div class="table-wrap"><table><thead><tr><th>Indicador</th><th>Valor</th><th>Z-score</th><th>Percentil aproximado</th><th>Clasificación</th></tr></thead><tbody>${rows}</tbody></table></div>
+        <div class="note info">${growthDataStatus}. El percentil se aproxima desde el Z-score LMS.</div>
+        <div class="table-wrap"><table><thead><tr><th>Indicador</th><th>Valor</th><th>Z-score</th><th>Percentil aproximado</th><th>Clasificación</th><th>Referencia</th></tr></thead><tbody>${rows}</tbody></table></div>
         <div class="result-card soft" style="margin-top:10px;">
           <h3>Texto para historia clínica</h3>
           <textarea class="anthro-text" id="anthroText" readonly>${clinicalText}</textarea>
@@ -944,7 +991,8 @@
         </div>
         <div class="cards">
           ${card("Alertas", "<p>Si obesidad: revisar dosis máximas y considerar peso ideal/ajustado para fármacos seleccionados.</p><p>Si desnutrición severa: mayor riesgo de hipoglucemia, hipotermia, alteraciones electrolíticas y sobredosificación relativa.</p>", "caution")}
-          ${card("Cómo añadir OMS", "<p>Reemplazar arrays vacíos de <strong>growthData</strong> con registros LMS por sexo, edad o talla. Luego buscar el registro más cercano y llamar <strong>calculateZScore(valor, L, M, S)</strong>.</p>", "info")}
+          ${card("Tablas LMS", "<p>La app usa <strong>growth-lms-oms-msp.json</strong>, generado desde el Excel LMS OMS/MSP. Para actualizarlo, reemplazar ese JSON y subir la versión del caché en el service worker.</p>", "info")}
+          ${referenceBlock(["REF-008", "REF-009", "REF-010", "REF-012"])}
         </div>`;
       $("copyAnthro").addEventListener("click", copyAnthropometryText);
     }
@@ -964,6 +1012,11 @@
           title: "Presentación curvas",
           file: "referencias/presentacion_curvas.pdf",
           description: "Material de apoyo para interpretación de curvas antropométricas."
+        },
+        {
+          title: "Algoritmos dengue OPS/OMS 2020",
+          file: "referencias/algoritmos_manejo_clinico_dengue_ops_2020.pdf",
+          description: "Algoritmos de manejo clínico, hidratación, hospitalización, alta y signos de alarma."
         }
       ];
       $("references").innerHTML = `<h2>Tablas OMS / MSP Ecuador</h2>
@@ -1011,6 +1064,7 @@
       renderRSIModule();
       renderVentilationModule();
       renderAntibioticModule();
+      renderDengueModule();
       renderAnthropometryModule();
       renderReferencesModule();
       renderSettings();
@@ -1047,22 +1101,6 @@
       setTimeout(() => btn.textContent = old, 1200);
     }
     function printResults() { window.print(); }
-    function initConsentGate() {
-      const overlay = $("consentOverlay");
-      const check = $("consentCheck");
-      const accept = $("acceptConsent");
-      if (!overlay || !check || !accept) return;
-      if (localStorage.getItem(CONSENT_KEY) === "accepted") return;
-      overlay.classList.add("active");
-      check.addEventListener("change", () => {
-        accept.disabled = !check.checked;
-      });
-      accept.addEventListener("click", () => {
-        if (!check.checked) return;
-        localStorage.setItem(CONSENT_KEY, "accepted");
-        overlay.classList.remove("active");
-      });
-    }
     function buildPlainTextSummary() {
       const p = state.patient, d = state.doses;
       return [
@@ -1142,8 +1180,7 @@
       calculateAndRender();
     });
 
-    calculateAndRender();
-    initConsentGate();
+    loadGrowthData().then(calculateAndRender);
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));
     }

@@ -1,17 +1,18 @@
-const CACHE_NAME = "calculadora-pediatrica-emergencia-v5";
+const CACHE_NAME = "calculadora-pediatrica-emergencia-v9";
 
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./privacy.html",
   "./manifest.json",
+  "./growth-lms-oms-msp.json",
   "./logo.png",
   "./icon-192.png",
   "./icon-512.png",
   "./maskable-icon-512.png",
   "./referencias/curvas_oms.pdf",
   "./referencias/fanta_bmi_charts_espanol.pdf",
-  "./referencias/presentacion_curvas.pdf"
+  "./referencias/presentacion_curvas.pdf",
+  "./referencias/algoritmos_manejo_clinico_dengue_ops_2020.pdf"
 ];
 
 self.addEventListener("install", event => {

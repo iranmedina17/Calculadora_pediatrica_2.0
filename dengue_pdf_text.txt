@@ -1,0 +1,739 @@
+---PAGE 1---
+ 
+  
+Junio, 2020 
+Algoritmos para el Manejo 
+Clínico de los Casos de 
+Dengue 
+ 
+ 
+Programa Regional de Enfermedades Arbovirales 
+
+---PAGE 2---
+ 
+ 
+ 
+1 
+Algoritmos para el Manejo Clínico de Casos de Dengue 
+ 
+ 
+Contenido 
+ 
+ 
+Introducción ................................................................................................................................................. 2 
+Metodología ................................................................................................................................................. 3 
+Agradecimientos .......................................................................................................................................... 4 
+Abreviaturas y Siglas .................................................................................................................................... 5 
+Definición de Caso Sospechoso de Dengue ................................................................................................. 6 
+Clasificación de Gravedad del Dengue ........................................................................................................ 7 
+Algoritmo para la Atención de Casos Sospechosos de Dengue .................................................................. 8 
+Grupos de Intervención ................................................................................................................................ 9 
+Criterios de Hospitalización por Dengue ................................................................................................... 10 
+Criterios de Alta en Pacientes con Dengue ............................................................................................... 10 
+Algoritmo para el Manejo de Pacientes con Dengue Sin Signos de Alarma (DSSA) – Grupo A y B1 ....... 11 
+Algoritmo para el Manejo de Líquidos Intravenosos en Pacientes con Dengue Con Signos de Alarma 
+(DCSA) – Grupo B2 ...................................................................................................................................... 12 
+Algoritmo para el Manejo de Líquidos Intravenosos en Pacientes con DCSA + Comorbilidad o Adulto 
+Mayor – Grupo B2 ...................................................................................................................................... 13 
+Algoritmo para el Manejo de Líquidos Intravenosos en Pacientes con Choque Hipovolémico por 
+Dengue Grave – Grupo C ............................................................................................................................ 14 
+Bibliografía.................................................................................................................................................. 15 
+ 
+  
+
+---PAGE 3---
+ 
+ 
+ 
+2 
+Introducción 
+ 
+El dengue es una enfermedad infecciosa ocasionada por  un flavivirus, denominado virus del 
+dengue (DENV), del cual se conocen cuatro serotipos distintos (DENV1, DENV2, DENV3 y DENV4). 
+Esta enfermedad representa una amenaza a la salud pública global  y se estima que ocurren 390 
+millones de infecciones anualmente. En las Américas, el dengue es la arbovirosis de mayor 
+importancia. El número de casos de esta enfermedad ha aumentado de manera exponencial, con 
+epidemias que ocurren cada tres a cinco años. La epidemia más reciente es la reportada en el 
+2019, con más de 3.1 millones de casos, la cual  se ha extendido hasta el año 2020 , registrando 
+hasta mediados de junio, 1.7 millones de casos; 3,677 graves y 613 muertes. 
+ 
+Sumado a la compleja situación que representa el dengue en las Américas , está la circulación 
+simultánea de otras arbovirosis; chikungunya y el Zika . Estas arbovirosis pueden causar 
+infecciones con manifestaciones clínicas muy similares a las producidas por el DENV, dificultando 
+muchas veces realizar un adecuado diagnóstico clínico , conllevando a  un inadecuado manejo  
+clínico de los casos. 
+ 
+Para dar una respuesta integral a las arbovirosis la Organización Panamericana de la Salu d/ 
+Organización Mundial de la Salud  (OPS/OMS) y los países de la reg ión desarrollaron e 
+implementaron la Estrategia de Gesti ón Integrada para la prevención y control de las 
+enfermedades arbovirales  (EGI-arbovirus). En el marco de trabajo de la Estrategia, se ha 
+publicado material destinado al diagnóstico y manejo clínico del dengue y de otras arbovirosis. 
+Los más recientes son, la segunda edición de las Guías de dengue para la atención de enfermos 
+en la Región de las Américas y el Instrumento para el diagnóstico y la atención de pacientes con 
+sospecha de arbovirosis . También, es importante mencionar que actualmente se trabaja en el 
+desarrollo de la primera edición de la  Guía de enfermedades arbovirales  para la atención de 
+enfermos en la Región de las Américas, la cual se estima será publicada a finales del 2020. 
+ 
+En el presente documento se pone a disposición del usuario información resumida para el manejo 
+clínico de los casos sospechosos de dengue, todo representado a través de tablas y algoritmos. El 
+objetivo es proporcionar al usuario una guía de consulta rápida sobre la definición de caso 
+sospechoso de dengue, su clasificación de gravedad, manejo clínico según grupos de 
+intervención, así como los criterios de hospitalización y de alta para pacientes con dengue. Este 
+material está dirigido al personal de salud a cargo de la atención de casos de dengue  como una 
+herramienta adicional para el adecuado manejo de los pacientes , con la finalidad de evitar las 
+muertes producidas por esta enfermedad. 
+
+---PAGE 4---
+ 
+ 
+ 
+3 
+Metodología 
+ 
+La información contenida en el presente documento está basada  en las publicaciones Dengue: 
+Guías para la atención de enfermos en la Región de las Américas  (segunda edición) y en el 
+Instrumento para el diagnóstico y la atención de pacientes con sospecha de arbovirosis , ambos 
+de la OPS. Además, se ha incorporado  información actualizada relacionada a los criterios de 
+hospitalización de pacientes con dengue y al uso de metamizol para el control de la fiebre de 
+estos casos. La actualización de esta información está basada en  los resultados de una revisión 
+sistemática y metaanálisis llevado a cabo por la OPS durante el  2019, como parte de  la 
+metodología GRADE para el  desarrollo de la primera edición de la  Guía de enfermedades 
+arbovirales para la atención de enfermos en la Región de las Américas. El trabajo fue realizado a 
+través de tres reuniones virtuales realizadas durante el mes de junio del 2020. 
+ 
+Grupo de trabajo: la elaboración y revisión de este documento estuvo a cargo del personal 
+técnico del Programa Regional de Enfermedades Arbovirales de la OPS/OMS y médicos clínicos 
+de las Américas, miembros del Grupo Técnico Internacional de expertos en arbovirosis de la OPS 
+(GT-arbovirus internacional). 
+ 
+ 
+  
+
+---PAGE 5---
+ 
+ 
+ 
+4 
+Agradecimientos 
+ 
+La Organización Panamericana de la Salud/Organización Mundial de la Salud (OPS/OMS) 
+agradece a los siguientes profesionales en la elaboración y revisión del presente documento: Dra. 
+Anabelle Alfaro (GT -arbovirus internacional  – Costa Rica), Dr. José Guadalupe Martínez (GT -
+arbovirus internacional, Secretaría de Salud de México), Dr. Ernesto Pleités (GT -arbovirus 
+internacional, Hospital Benjamín Bloom – El Salvador), Dr. Jacob Rosales Velázquez (GT-arbovirus 
+internacional, Hospital de Alta Especialidad "Bicentenario 2010"  – México), y a los doctores 
+Gamaliel Gutiérrez y José Luis San Martín, ambos de la OPS/OMS. 
+ 
+La revisión y edición final de este documento estuvo a cargo del Dr. Gamaliel Gutiérrez de la 
+OPS/OMS.  
+
+---PAGE 6---
+ 
+ 
+ 
+5 
+Abreviaturas y Siglas 
+ 
+ 
+DCSA Dengue con signos de alarma 
+DENV Virus del dengue 
+DG Dengue grave 
+DSSA Dengue sin signos de alarma 
+g Gramo / gramos 
+GT-arbovirus Grupo Técnico de experto en arbovirosis 
+h Hora / horas 
+I.V Intravenoso 
+kg Kilogramo / kilogramos 
+mg Miligramo / miligramos 
+min Minuto / minutos 
+ml Mililitro / mililitros 
+OMS Organización Mundial de la Salud 
+OPS Organización Panamericana de la Salud 
+SSN Solución salina normal 
+UCI Unidad de cuidados intensivos 
+V.O Vía oral 
+ 
+  
+
+---PAGE 7---
+ 
+ 
+ 
+6 
+Definición de Caso Sospechoso de Dengue 
+ 
+ 
+Persona que vive o ha viajado en los últimos 14 días a zonas con transmisión de dengue, y 
+presenta fiebre aguda habitualmente de 2 a 7 días de evolución, y dos o más de las 
+siguientes manifestaciones: náusea/vómitos, exantema, cefalea/dolor retroorbitario, 
+mialgia/artralgia, petequias o prueba de torniquete positiva (+), leucopenia, con o sin 
+cualquier signo de alarma o signo de gravedad. 
+También se considera caso sospechoso a todo niño que reside o haya viajado en los últimos 
+14 días a una zona con transmisión de dengue que presenta cuadro febril agudo, por lo 
+general, de 2 a 7 días de evolución, sin foco aparente. 
+ 
+  
+
+---PAGE 8---
+ 
+ 
+ 
+7 
+Clasificación de Gravedad del Dengue 
+Dengue sin signos de alarma 
+(DSSA) 
+Dengue con signos de alarma 
+(DCSA) 
+Dengue grave (DG) 
+Persona que vive o ha viajado 
+en los últimos 14 días a zonas 
+con transmisión de dengue y 
+presenta fiebre habitualmente 
+de 2 a 7 días de evolución, y 2 o 
+más de las siguientes 
+manifestaciones: 
+1. Náuseas / vómitos  
+2. Exantema  
+3. Cefalea / dolor 
+retroorbitario  
+4. Mialgia / artralgia  
+5. Petequias o prueba del 
+torniquete (+)  
+6. Leucopenia  
+Todo caso de dengue que cerca 
+de y preferentemente a la caída 
+de la fiebre presenta uno o más 
+de los siguientes signos: 
+1. Dolor abdominal intenso y 
+sostenido, o dolor a la 
+palpación del abdomen 
+2. Vómitos persistentes 
+3. Acumulación de líquidos 
+4. Sangrado de mucosas 
+5. Letargo / irritabilidad 
+6. Hipotensión postural 
+(lipotimia) 
+7. Hepatomegalia >2 cm 
+8. Aumento progresivo del 
+hematocrito 
+Todo caso de dengue que 
+tiene una o más de las 
+siguientes manifestaciones: 
+1. Choque o dificultad 
+respiratoria debido a 
+extravasación grave de 
+plasma. 
+ 
+2. Sangrado grave: según 
+la evaluación del médico 
+tratante 
+ 
+3. Compromiso grave de 
+órganos (daño hepático, 
+miocarditis, etc.) 
+ 
+Requieren monitoreo estricto e intervención médica inmediata 
+Primer nivel 
+Manejo ambulatorio 
+Internar en hospital o unidades 
+de dengue Hospitalizar UCI 
+ 
+  
+
+---PAGE 9---
+ 
+ 
+ 
+8 
+Algoritmo para la Atención de Casos Sospechosos de Dengue 
+ 
+  
+ 
+¿Cumple el paciente con la definición de caso 
+sospechoso de dengue? 
+Sí 
+Responda las siguientes preguntas: 
+▪ ¿En qué fase del dengue se encuentra?   
+     (febril/crítica/recuperación) 
+▪ ¿Tiene signos de alarma? 
+▪ ¿Cuál es el estado hemodinámico y de hidratación? 
+¿Está en choque? 
+▪ ¿Tiene enfermedad o condición asociadas o riesgo 
+social?  
+▪ ¿Requiere hospitalización? 
+Sospechar de: 
+▪ COVID-19 
+▪ Zika 
+▪ Influenza 
+▪ Sarampión 
+▪ Rubéola 
+▪ Chikungunya 
+▪ Rickettsiosis 
+▪ Paludismo 
+▪ Leptospirosis 
+▪ Fiebre tifoidea 
+▪ Hepatitis viral 
+▪ Fiebre amarilla 
+▪ Leucemia 
+▪ Hantavirus 
+No 
+Realizar diagnóstico diferencial* 
+Clasifique según la gravedad del dengue 
+Dengue sin signos de 
+alarma 
+Dengue con signos 
+de alarma Dengue grave 
+Grupo A: Tratamiento en el 
+hogar. Manejo por el primer 
+nivel de atención 
+Grupo B1: Posible remisión a 
+unidad de dengue para 
+observación y atención de su 
+infección y afecciones asociadas 
+Grupo B2: Remisión a 
+hospital o unidades 
+de dengue para 
+administración de 
+líquidos intravenosos 
+Grupo C: Tratamiento de 
+urgencia durante el 
+traslado y remisión de 
+urgencia a un hospital 
+más complejo 
+Definir caso Establecer condición clínica y clasificación de gravedad del caso Establecer el Grupo de tratamiento 
+*Se debe de tomar en cuenta el 
+contexto epidemiológico local. 
+
+---PAGE 10---
+ 
+ 
+ 
+9 
+Grupos de Intervención 
+ 
+ Grupo A Grupo B1 Grupo B2 Grupo C 
+Clasificación 
+de gravedad 
+Dengue sin signos de 
+alarma (DSSA) 
+Dengue sin signos de 
+alarma (DSSA) 
+Dengue con signos 
+de alarma (DCSA) 
+Dengue grave (DG) 
+Criterios de 
+grupo 
+Toleran volúmenes 
+adecuados de 
+líquidos por vía oral 
+Orinan al menos una 
+vez cada 6 horas 
+Sin enfermedades ni 
+condiciones 
+asociadas, ni riesgo 
+social 
+Presentan enfermedad o 
+condiciones asociadas: 
+▪ Embarazo 
+▪ ≤ 1 año 
+▪ ≥ 65 años 
+▪ Obesidad mórbida 
+▪ Hipertensión arterial 
+▪ Diabetes mellitus 
+▪ Asma 
+▪ Daño renal 
+▪ Enfermedades   
+   hemolíticas 
+▪ Hepatopatía crónica 
+▪ Enfermedad úlcero- 
+péptica o gastritis de 
+cualquier etiología 
+▪ En tratamiento con 
+anticoagulantes 
+▪ Entre otras 
+o, 
+Presentan riesgo social: 
+▪ El paciente vive solo o 
+lejos de donde puede 
+recibir atención médica 
+▪ No tiene transporte 
+▪ Vive en pobreza 
+extrema 
+Pacientes que, 
+cercanos a la caída 
+de la fiebre o más 
+frecuentemente  
+a la caída de la 
+fiebre o en las horas 
+siguientes, 
+presenten uno o 
+más 
+de los siguientes 
+signos: 
+1. Dolor abdominal 
+intenso o dolor a la 
+palpación del 
+abdomen 
+2. Vómitos 
+persistentes 
+3. Acumulación de 
+líquidos 
+4. Sangrado de 
+mucosas 
+5. Letargo / 
+irritabilidad 
+6. Hipotensión 
+postural (lipotimia) 
+7. Hepatomegalia 
+>2 cm 
+8. Aumento 
+progresivo del 
+hematocrito 
+Todo caso de 
+dengue que tiene 
+una o más de las 
+siguientes 
+manifestaciones: 
+▪ Choque o 
+dificultad 
+respiratoria debido 
+a extravasación 
+grave de plasma. 
+ 
+▪ Sangrado grave: 
+según la evaluación 
+del médico tratante. 
+ 
+▪ Compromiso grave 
+de órganos (daño 
+hepático, 
+miocarditis, etc.). 
+Nivel de 
+atención 
+para 
+manejo 
+Nivel primario. 
+Tratamiento en el 
+hogar 
+Posible remisión a 
+hospital o unidades de 
+dengue. 
+Requiere observación y 
+atención de su infección y 
+condición asociada. 
+Hospital o unidades 
+de dengue. 
+Requiere 
+administración de 
+líquidos IV. 
+Unidad de Cuidados 
+Intensivos. 
+Requiere 
+tratamiento de 
+urgencia. 
+
+---PAGE 11---
+ 
+ 
+ 
+10 
+Criterios de Hospitalización por Dengue 
+ 
+Los siguientes criterios de hospitalización son resultados de una revisión sistemática  y 
+metaanálisis realizados en el 2019. Se identificaron 217 estudios que incluyeron 237 ,191 
+pacientes con diagnóstico de dengue en los que se evaluó la relación de distintos potenciales 
+factores pronósticos con la evolución a enfermedad grave. 
+Criterios de hospitalización en pacientes con dengue 
+Se sugiere hospitalizar aquellos pacientes que presenten dengue más cualquiera de lo siguiente: 
+• Dengue con signos de alarma 
+• Dengue grave 
+• Intolerancia a la vía oral 
+• Dificultad respiratoria 
+• Acortamiento de la presión de pulso 
+• Prolongación de llenado capilar (mayor de 2 segundos) 
+• Hipotensión arterial 
+• Insuficiencia renal aguda 
+• Embarazo 
+• Coagulopatía 
+Consideraciones adicionales: Otros factores que pueden determinar la necesidad de hospitalización 
+de pacientes con dengue incluyen; la presencia de comorbilidades, los extremos de la vida y 
+condiciones sociales y/o ambientales. La decisión de admitir pacientes con las mencionadas 
+condiciones deberá individualizarse. 
+ 
+ 
+Criterios de Alta en Pacientes con Dengue 
+Criterios de alta en pacientes con dengue 
+Criterios clínicos 
+• Ausencia de fiebre por 48 horas sin administración de antipiréticos 
+• Mejoría del estado clínico (bienestar general, buen apetito, estado 
+hemodinámico normal, diuresis normal o aumentada, sin dificultad 
+respiratoria y sin evidencia de sangrado) 
+Criterios de 
+laboratorio 
+• Tendencia ascendente del recuento de plaquetas 
+• Hematocrito estable, sin líquidos intravenosos 
+
+---PAGE 12---
+ 
+ 
+ 
+11 
+Algoritmo para el Manejo de Pacientes con Dengue Sin Signos de 
+Alarma (DSSA) – Grupo A y B1 
+ 
+ 
+ 
+  
+Referencia a unidad de dengue u 
+hospital 
+▪ Vigilar por signos de alarma. 
+▪ Valoración binomio madre/hijo en gestantes. 
+▪ Estabilizar y manejar comorbilidades. 
+▪ Curva febril. 
+▪ Estimular la ingestión de líquidos por vía oral. 
+▪ Si el paciente no bebe, bebe poco, o está 
+deshidratado, iniciar líquidos I.V (según la fórmula de 
+Holliday y Seagar), con lactato de Ringer o SSN 0,9% 
+(2-4ml/kg/h.). 
+▪ Balance de líquidos. 
+▪ Se debe reiniciar la vía oral tan pronto sea posible. 
+Pacientes con dengue sin signos de alarma (DSSA) 
+¿Comorbilidad, condición o riesgo social? No Sí 
+ií 
+¿Criterio de hospitalización? No 
+Sí 
+ií 
+Tratamiento en el hogar 
+▪ Reposo absoluto en cama. 
+▪ Dieta normal + Abundantes líquidos orales 
+(sales de rehidratación oral). 
+▪ Educar sobre signos de alarma  
+▪ Lienzos de agua tibia en la frente. 
+Fármacos: 
+▪ Niños: acetaminofén V.O 10mg/kg cada 6 h. 
+▪ Adultos: acetaminofén V.O 500 mg cada 6 h. 
+Dosis máxima diaria 4 g. 
+  o 
+▪ Niños: metamizol V.O 10/kg cada 6 h. 
+▪ Adultos: metamizol V.O 500 mg cada 6 h. 
+Monitoreo cada 24 a 48 h y hasta 48 h 
+después del descenso de la fiebre sin el uso de 
+antipiréticos 
+Clasificar como DCSA y 
+manejar como Grupo B2 
+Aparecen signos 
+de alarma (DCSA) 
+No aparecen 
+signos de alarma 
+Dar alta por dengue si se cumplen criterios 
+
+---PAGE 13---
+ 
+ 
+ 
+12 
+Algoritmo para el Manejo de Líquidos Intravenosos en Pacientes con 
+Dengue Con Signos de Alarma (DCSA) – Grupo B2 
+ 
+ 
+ 
+ 
+  ¿Comorbilidad o adulto mayor? No Sí 
+ií 
+Solución cristaloide (Hartman o solución 
+salina normal 0.9%) 10ml/kg en 1 h. 
+Reevaluar: Hay mejoría clínica 
+Reducir goteo a 5 a 7 ml/kg/h y 
+continúe por 2-4 h + monitoreo horario 
+al paciente. 
+Reevaluar: Hay mejoría clínica 
+Reducir goteo a 3-5 ml/kg/h y continúe 
+por 2-4 h + monitoreo horario al 
+paciente. 
+Reducir goteo a 2 a 4 ml/kg/h y continúe 
+por 24-48 h + monitoreo horario al 
+paciente. 
+Reevaluar: Hay mejoría clínica 
+Reevaluar: Sin mejoría clínica 
+Repetir 2ª carga de 10ml/kg 
+en 1 h. 
+Reevaluar: Sin mejoría clínica 
+Repetir 3ª carga de 10ml/kg 
+en 1 h. 
+Reevaluar: Sin mejoría clínica 
+Clasificar como dengue grave 
+y manejar como Grupo C. 
+Pacientes con dengue con signos de alarma 
+(DCSA) 
+Ver algoritmo para DCSA + 
+comorbilidad o adulto mayor 
+La mejoría clínica está dada 
+por: 
+• Desaparición progresiva 
+de los signos de alarma 
+• Remisión progresiva de 
+la sintomatología 
+general 
+• Signos vitales estables 
+• Diuresis normal o 
+aumentada 
+• Disminución del 
+hematocrito a menos del 
+valor base en un 
+paciente estable 
+• Buena tolerancia a la vía 
+oral 
+• Recuperación del apetito 
+ 
+
+---PAGE 14---
+ 
+ 
+ 
+13 
+Algoritmo para el Manejo de Líquidos Intravenosos en Pacientes con 
+DCSA + Comorbilidad o Adulto Mayor – Grupo B2 
+ 
+ 
+  
+Pacientes con dengue con signos de alarma 
+(DCSA) + comorbilidad o adulto mayor 
+Solución cristaloide (Hartman o SSN 0.9%) 
+5 ml/kg en 1 h. 
+ 
+Reevaluar: Hay mejoría clínica 
+Reducir goteo a 4 ml/kg/h y continúe por 
+2-4 h + monitoreo horario al paciente. 
+ 
+Reevaluar: Hay mejoría clínica 
+Reducir goteo a 3 ml/kg/h y continúe por 
+2-4 h + monitoreo horario al paciente. 
+ 
+Reevaluar: Hay mejoría clínica 
+Reducir goteo a 2 ml/kg/h y continúe por 
+2-4 h + monitoreo horario al paciente. 
+ 
+Reevaluar: Sin mejoría clínica 
+Repetir 2ª carga de 5ml/kg en 
+1 h. 
+Repetir 3ª carga de 5ml/kg en 
+1 h. 
+Reevaluar: Sin mejoría clínica 
+Reevaluar: Sin mejoría clínica 
+Clasificar como dengue grave 
+y manejar como Grupo C. 
+La mejoría clínica está 
+dada por: 
+• Desaparición 
+progresiva de los 
+signos de alarma 
+• Remisión progresiva 
+de la sintomatología 
+general 
+• Signos vitales estables 
+• Diuresis normal o 
+aumentada 
+• Disminución del 
+hematocrito a menos 
+del valor base en un 
+paciente estable 
+• Buena tolerancia a la 
+vía oral 
+• Recuperación del 
+apetito 
+ 
+
+---PAGE 15---
+ 
+ 
+ 
+14 
+Algoritmo para el Manejo de Líquidos Intravenosos en Pacientes con 
+Choque Hipovolémico por Dengue Grave – Grupo C 
+ 
+ 
+  Pacientes con choque hipovolémico por 
+dengue grave 
+¿Comorbilidad, embarazada, adulto mayor? Sí 
+ií 
+El manejo del adulto mayor, 
+paciente con comorbilidad 
+y/o de la embarazada debe 
+ser individualizado y con 
+monitoreo estricto” 
+Persisten signos de choque 
+Persisten signos de choque 
+Persisten signos de choque 
+Administrar 2º bolo solución 
+cristaloide 20ml/kg en 15-30min 
+ 
+Administrar 3º bolo solución 
+cristaloide 20ml/kg en 15-30min 
+ 
+En caso de choque persistente: 
+▪ Determinar la función de bomba y el uso de aminas; 
+▪ Evaluar las condiciones médicas concomitantes y estabilizar la 
+condición de base; 
+▪ Evaluar la acidosis persistente y el riesgo de hemorragia 
+(oculta) y tratarlas; 
+▪ De necesitarse otros bolos de solución hidratante (cristaloide o 
+coloide) durante las próximas 24 horas, la velocidad y el 
+volumen de cada bolo dependerá de la respuesta clínica; 
+▪ De preferencia, manejar en sala de cuidados intensivos 
+ 
+ 
+ 
+ABC y monitoreo de signos vitales cada 5 a 30 min + Oxigenoterapia 
+La mejoría clínica está dada 
+por: 
+• Remisión de signos de 
+choque 
+• Signos vitales estables 
+• Diuresis normal o 
+aumentada 
+• Disminución del 
+hematocrito a menos del 
+valor base en un paciente 
+estable 
+No 
+Solución cristaloide (Hartman o solución 
+salina normal 0.9%) 20ml/kg en 15-30 min 
+Reevaluar: Hay mejoría clínica 
+Reducir goteo a 10 ml/kg/h y continúe 
+por 1-2 h + monitoreo horario 
+Reducir goteo a 5-7 ml/kg/h y continúe 
+por 4-6 h + monitoreo horario 
+Reducir goteo a 3-5 ml/kg/h y continúe 
+por 2-4 h + monitoreo horario 
+Reducir goteo a 2-4 ml/kg/h y continúe 
+por 24-48 h + monitoreo horario 
+Reevaluar: Hay mejoría clínica 
+Reevaluar: Hay mejoría clínica 
+Reevaluar: Hay mejoría clínica 
+
+---PAGE 16---
+ 
+ 
+ 
+15 
+Bibliografía 
+ 
+1. Organización Panamericana de la Salud. Dengue: guías para la atención de enfermos en 
+la región de las Américas. 2ª edición. Washington OPS; 2016. Disponible en : 
+https://iris.paho.org/handle/10665.2/28232 
+ 
+2. Organización Panamericana de la Salud.  Instrumento para el diagnóstico y la atención a 
+pacientes con sospecha de arbovirosis.  Washington OPS; 2016. Disponible en: 
+https://iris.paho.org/handle/10665.2/31448 
+ 
+3. Organización Mundial de la Salud. Dengue: Guías para el diagnóstico, tratamiento, 
+prevención y control . Nueva edición 2009. Ginebra OMS; 2009. Disponible e n: 
+https://www.who.int/denguecontrol/resources/dengue_guidelines_2009/es/ 
+ 
+4. Organización Panamericana de la Salud. Estrategia de Gestión Integrada para la 
+prevención y co ntrol del dengue en la Región de las Américas. Washington, D.C.: OPS; 
+2018. Disponible en: https://iris.paho.org/handle/10665.2/34859 
+ 
+5. Organización Panamericana de la Salud. Estrategia de gestión i ntegrada para la 
+prevención y el control de las enfermedades arbovirales en las Américas. Washington: 
+OPS; 2019. Disponible en: https://iris.paho.org/handle/10665.2/51787 
