@@ -1,8 +1,9 @@
-const CACHE_NAME = "calculadora-pediatrica-android-v2";
+const CACHE_NAME = "calculadora-pediatrica-android-v5";
 
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./hoja-parada.html",
   "./manifest.json",
   "./growth-lms-oms-msp.json",
   "./growth-lms-oms-msp.js",
