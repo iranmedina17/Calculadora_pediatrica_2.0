@@ -6,42 +6,182 @@
   <title>Hoja de parada pediátrica</title>
   <style>
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #eef1f5; color: #111; font-family: Arial, sans-serif; }
-    .print-actions { position: sticky; top: 0; z-index: 2; display: flex; justify-content: center; gap: 8px; padding: 10px; background: #10131f; }
-    .print-actions button { min-height: 44px; border: 0; border-radius: 8px; padding: 9px 14px; font: 700 14px Arial, sans-serif; cursor: pointer; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #eef1f5;
+      color: #111;
+      font-family: Arial, sans-serif;
+    }
+    .print-actions {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      background: #10131f;
+    }
+    .print-actions button {
+      min-height: 44px;
+      border: 0;
+      border-radius: 8px;
+      padding: 9px 14px;
+      font: 700 14px Arial, sans-serif;
+      cursor: pointer;
+    }
     .print-primary { background: #7dd3fc; color: #06101b; }
     .print-close { background: #334155; color: white; }
-    .print-document { width: 210mm; min-height: 297mm; margin: 12px auto; padding: 9mm; background: white; box-shadow: 0 8px 30px rgba(0,0,0,.2); font-size: 9pt; line-height: 1.25; }
-    .sheet-header { display: flex; align-items: center; gap: 10px; border-bottom: 3px solid #a20f1a; margin-bottom: 8px; padding-bottom: 6px; }
+    .print-document {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12px auto;
+      padding: 9mm;
+      background: white;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
+      font-size: 9pt;
+      line-height: 1.25;
+    }
+    .sheet-page { width: 100%; }
+    .sheet-page-second { margin-top: 12px; }
+    .sheet-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 3px solid #a20f1a;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+    }
     .sheet-logo { width: 58px; height: 58px; object-fit: contain; }
     .sheet-header-copy { flex: 1; }
-    .sheet-header h1 { margin: 0; color: #8a1018; font-size: 20pt; text-transform: uppercase; }
+    .sheet-header h1 {
+      margin: 0;
+      color: #8a1018;
+      font-size: 20pt;
+      text-transform: uppercase;
+    }
     .sheet-header p { margin: 3px 0 0; }
     .sheet-section { margin: 8px 0; }
-    .sheet-section h2 { margin: 0; padding: 4px 6px; background: #e8edf3; border-left: 4px solid #8a1018; font-size: 11pt; }
-    .sheet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 4px; }
+    .sheet-section h2 {
+      margin: 0;
+      padding: 4px 6px;
+      background: #e8edf3;
+      border-left: 4px solid #8a1018;
+      font-size: 11pt;
+    }
+    .sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      margin-top: 4px;
+    }
     .sheet-box { border: 1px solid #adb5bd; padding: 4px 6px; }
-    .sheet-box span { display: block; color: #555; font-size: 7.5pt; text-transform: uppercase; }
+    .sheet-box span {
+      display: block;
+      color: #555;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+    }
     .sheet-box strong { font-size: 10pt; }
-    .sheet-table { width: 100%; margin-top: 4px; border-collapse: collapse; }
-    .sheet-table th, .sheet-table td { border: 1px solid #adb5bd; padding: 3px 4px; color: #111; font-size: 8pt; vertical-align: top; }
+    .sheet-table {
+      width: 100%;
+      margin-top: 4px;
+      border-collapse: collapse;
+    }
+    .sheet-table th,
+    .sheet-table td {
+      border: 1px solid #adb5bd;
+      padding: 3px 4px;
+      color: #111;
+      font-size: 8pt;
+      vertical-align: top;
+    }
     .sheet-table th { background: #f1f3f5; font-weight: 800; }
-    .sheet-warning { border: 1px solid #8a1018; padding: 5px 7px; color: #6f0d14; font-weight: 700; }
-    .sheet-page-break { break-before: page; page-break-before: always; }
-    .empty-message { max-width: 620px; margin: 40px auto; padding: 18px; border: 1px solid #adb5bd; border-radius: 8px; background: white; text-align: center; }
+    .sheet-warning {
+      border: 1px solid #8a1018;
+      padding: 5px 7px;
+      color: #6f0d14;
+      font-weight: 700;
+    }
+    .empty-message {
+      max-width: 620px;
+      margin: 40px auto;
+      padding: 18px;
+      border: 1px solid #adb5bd;
+      border-radius: 8px;
+      background: white;
+      text-align: center;
+    }
     @media (max-width: 760px) {
-      .print-document { width: calc(100% - 16px); min-height: 0; margin: 8px; padding: 10px; }
+      .print-document {
+        width: calc(100% - 16px);
+        min-height: 0;
+        margin: 8px;
+        padding: 10px;
+      }
       .sheet-grid { grid-template-columns: 1fr 1fr; }
       .print-actions button { flex: 1 1 auto; }
     }
     @media print {
       @page { size: A4 portrait; margin: 9mm; }
-      html, body { width: auto !important; height: auto !important; overflow: visible !important; background: white; }
+      html, body {
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        background: white;
+      }
       .print-actions { display: none !important; }
-      .print-document { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
-      .sheet-page-break { break-before: page; page-break-before: always; }
-      .sheet-header, .sheet-grid, .sheet-warning, .sheet-section h2, .sheet-table tr { break-inside: avoid; page-break-inside: avoid; }
-      .sheet-table thead { display: table-header-group; }
+      .print-document {
+        width: auto;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+      .sheet-page {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        break-inside: auto;
+        page-break-inside: auto;
+      }
+      .sheet-page-second {
+        break-before: page;
+        page-break-before: always;
+      }
+      .sheet-page-second {
+        font-size: 7.5pt;
+        line-height: 1.12;
+      }
+      .sheet-page-second .sheet-section { margin: 4px 0; }
+      .sheet-page-second .sheet-section h2 {
+        padding: 3px 5px;
+        font-size: 9pt;
+      }
+      .sheet-page-second .sheet-table { margin-top: 2px; }
+      .sheet-page-second .sheet-table th,
+      .sheet-page-second .sheet-table td {
+        padding: 2px 3px;
+        font-size: 6.7pt;
+        line-height: 1.08;
+      }
+      .sheet-page-second .sheet-warning {
+        padding: 3px 5px;
+        font-size: 7pt;
+      }
+      .sheet-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      }
+      .sheet-header,
+      .sheet-grid,
+      .sheet-warning,
+      .sheet-section h2,
+      .sheet-table tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .sheet-table thead { display: table-row-group; }
     }
   </style>
 </head>

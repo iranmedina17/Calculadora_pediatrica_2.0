@@ -1,4 +1,4 @@
-const CACHE_NAME = "calculadora-pediatrica-android-v5";
+const CACHE_NAME = "calculadora-pediatrica-emergencia-v18";
 
 const APP_SHELL = [
   "./",
