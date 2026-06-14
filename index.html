@@ -539,6 +539,11 @@
       .sheet-preview-actions .btn { flex: 1 1 auto; }
     }
     @media print {
+      html, body {
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
       body { background: white; color: black; }
       .app-header, .patient-card, .tabs, .actions, .btn { display: none !important; }
       .wrap { max-width: none; padding: 0; }
@@ -547,7 +552,13 @@
       .result-card p, .result-card li, .metric span, .metric strong { color: black !important; }
       body.arrest-sheet-print > :not(.arrest-sheet) { display: none !important; }
       body.arrest-sheet-print .arrest-sheet {
+        position: static !important;
+        inset: auto !important;
         display: block !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
         color: #111;
         background: white;
         font-family: Arial, sans-serif;
@@ -556,6 +567,10 @@
       }
       .sheet-preview-actions { display: none !important; }
       .sheet-preview-document {
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
         max-width: none;
         margin: 0;
         padding: 0;
@@ -584,8 +599,22 @@
       .sheet-header p { margin: 3px 0 0; }
       .sheet-section {
         margin: 8px 0;
-        break-inside: avoid;
+        break-inside: auto;
+        page-break-inside: auto;
       }
+      .sheet-header,
+      .sheet-grid,
+      .sheet-warning,
+      .sheet-section h2,
+      .sheet-table tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .sheet-table {
+        break-inside: auto;
+        page-break-inside: auto;
+      }
+      .sheet-table thead { display: table-header-group; }
       .sheet-section h2 {
         margin: 0;
         padding: 4px 6px;
@@ -1657,10 +1686,6 @@
         <section class="sheet-section">
           <h2>Convulsiones, anafilaxia y glucosa</h2>
           <table class="sheet-table"><thead><tr><th>Fármaco</th><th>Esquema</th><th>Dosis</th><th>Volumen</th></tr></thead><tbody>${otherRows}</tbody></table>
-        </section>
-        <section class="sheet-section">
-          <h2>Antibióticos de referencia</h2>
-          <table class="sheet-table"><thead><tr><th>Fármaco</th><th>Esquema</th><th>Dosis</th><th>Volumen</th></tr></thead><tbody>${buildAntibioticSheetRows(p.usedWeight)}</tbody></table>
         </section>
         <p class="sheet-warning">Herramienta de apoyo. Verificar peso, concentración, vía, dosis máxima, compatibilidad, alergias, función renal y protocolo institucional antes de administrar.</p>`;
     }
